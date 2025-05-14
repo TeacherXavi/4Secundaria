@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Listening: "You Must Try"</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            color: #555;
+            text-align: center;
+            max-width: 600px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Examen de Listening: "You Must Try"</h1>
+    <p>Haz clic en el botón para reproducir el audio. Solo puedes reproducirlo dos veces.</p>
+    <audio id="miAudio" src="Listening_4Secundaria.mp3"></audio>
+    <button id="botonReproducir" onclick="reproducirAudio()">Iniciar Audio</button>
+    <script>
+        const audio = document.getElementById('miAudio');
+        const boton = document.getElementById('botonReproducir');
+        let reproducciones = 0;
+        const maxReproducciones = 2;
+
+        // Función para reproducir el audio
+        function reproducirAudio() {
+            if (reproducciones < maxReproducciones) {
+                audio.play().then(() => {
+                    reproducciones++;
+                    console.log(`Reproducción ${reproducciones} de ${maxReproducciones}`);
+                    // Desactivar el botón después de la segunda reproducción
+                    if (reproducciones === maxReproducciones) {
+                        boton.disabled = true;
+                    }
+                }).catch(error => {
+                    console.error('Error al reproducir:', error);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
